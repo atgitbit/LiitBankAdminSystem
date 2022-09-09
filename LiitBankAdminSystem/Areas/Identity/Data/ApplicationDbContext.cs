@@ -1,4 +1,5 @@
 ﻿using LiitBankAdminSystem.Areas.Identity.Data;
+using LiitBankAdminSystem.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -13,13 +14,17 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         : base(options)
     {
     }
-
+    public virtual DbSet<Account> Accounts { get; set; }
+    public virtual DbSet<Card> Cards { get; set; }
+    public virtual DbSet<Customer> Customers { get; set; }
+    public virtual DbSet<Disposition> Dispositions { get; set; }
+    public virtual DbSet<Loan> Loans { get; set; }
+    public virtual DbSet<Transaction> Transactions { get; set; }
+    public virtual DbSet<User> Users { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        // Customize the ASP.NET Identity model and override the defaults if needed.
-        // For example, you can rename the ASP.NET Identity table names and more.
-        // Add your customizations after calling base.OnModelCreating(builder);
+       
         builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
     }
 }

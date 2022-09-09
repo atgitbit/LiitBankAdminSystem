@@ -5,7 +5,7 @@
 This application is made with the code-first approach and Mvc pattern in .NET Core 6 (VS 2022).
 I have scaffolded and modified the identity login and registration.
 
-## Database
+#### Database
 SQL
 
 Nugget 

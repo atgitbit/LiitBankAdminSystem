@@ -9,8 +9,8 @@ I have scaffolded and modified the identity login and registration.
 SQL
 
 #### Nugget 
-microsoft.aspnetcore.identity.entityframeworkcore 6.0.8
-microsoft.aspnetcore.identity.ui 6.0.8
-microsoft.entityframeworkcore.sqlserver 6.0.8 
-microsoft.entityframeworkcore.tools 6.0.8
-microsoft.visualstudio.web.codegeneration.design 6.0.8
+- microsoft.aspnetcore.identity.entityframeworkcore 6.0.8 
+- microsoft.aspnetcore.identity.ui 6.0.8
+- microsoft.entityframeworkcore.sqlserver 6.0.8 
+- microsoft.entityframeworkcore.tools 6.0.8
+- microsoft.visualstudio.web.codegeneration.design 6.0.8

@@ -1,8 +1,36 @@
-﻿@{
+﻿@model LiitBankAdminSystem.ViewModels.HomeIndexViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="col-md-6 col-xl-3">
+    <div class="card widget-card-1">
+        <div class="card-block-small">
+            <i class="icofont icofont-pie-chart bg-c-blue card1-icon"></i>
+            <span class="text-c-blue f-w-600">Antal Kunder</span>
+            <h4>@Model.SumCustomerCount</h4>
+        </div>
+    </div>
+</div>
+<!-- card1 end -->
+<!-- card1 start -->
+<div class="col-md-6 col-xl-3">
+    <div class="card widget-card-1">
+        <div class="card-block-small">
+            <i class="icofont icofont-ui-home bg-c-pink card1-icon"></i>
+            <span class="text-c-pink f-w-600">Antal Konton</span>
+            <h4>@Model.SumAccountCount</h4>
+        </div>
+    </div>
+</div>
+<!-- card1 end -->
+<!-- card1 start -->
+<div class="col-md-6 col-xl-3">
+    <div class="card widget-card-1">
+        <div class="card-block-small">
+            <i class="icofont icofont-warning-alt bg-c-green card1-icon"></i>
+            <span class="text-c-green f-w-600">Saldo konton</span>
+            <h4>@Model.SumAccountBalance</h4>
+        </div>
+    </div>
 </div>

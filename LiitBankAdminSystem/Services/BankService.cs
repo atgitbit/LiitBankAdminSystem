@@ -33,10 +33,5 @@ namespace LiitBankAdminSystem.Services
         {
             throw new NotImplementedException();
         }
-
-    
-    
-
-     
     }
 }

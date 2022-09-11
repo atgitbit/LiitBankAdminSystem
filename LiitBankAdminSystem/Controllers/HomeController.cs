@@ -9,17 +9,13 @@ namespace LiitBankAdminSystem.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly IBankService _bankService;
         private readonly ApplicationDbContext _context;
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, IBankService bankService)
+        public HomeController(ApplicationDbContext context)
         {
-            _logger = logger;
-            _context = context;
-            _bankService = bankService;
+           
             _context = context;
         }
-        [ResponseCache(Duration = 30, Location = ResponseCacheLocation.Any)]
+        //[ResponseCache(Duration = 30, Location = ResponseCacheLocation.Any)]
         public IActionResult Index()
         {
             var viewModel = new HomeIndexViewModel
@@ -28,8 +24,6 @@ namespace LiitBankAdminSystem.Controllers
                 SumAccountCount = _context.Accounts.Count(),
                 SumAccountBalance = _context.Accounts.Sum(b => b.Balance)
             };
-
-
             return View(viewModel);
         }
 

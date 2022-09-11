@@ -1,0 +1,50 @@
+﻿
+@model LiitBankAdminSystem.ViewModels.TransactionViewModel
+
+<form asp-controller="Cashier" asp-action="Transaction" method="post">
+
+    <div class="col-sm-12">
+
+        <div class="card">
+            <div class="card-header">
+                <h5>Överför pengar</h5>
+                <div class="card-header-right">
+                    <i class="icofont icofont-spinner-alt-5"></i>
+                </div>
+            </div>
+
+            <div class="card-block">
+                <label asp-for="FromAccountId">Från kontonummer</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" asp-for="FromAccountId">
+                    <span asp-validation-for="FromAccountId" class="field-validation-error" style="color: red"></span>
+                </div>
+            </div>
+            <div class="card-block">
+                <label asp-for="AmountToSend">Summa att skicka</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" asp-for="AmountToSend">
+                    <span asp-validation-for="AmountToSend" class="field-validation-error" style="color: red"></span>
+                </div>
+            </div>
+            <div class="card-block">
+                <label asp-for="ToAccountId">Till Kontonummer</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" asp-for="ToAccountId">
+                    <span asp-validation-for="ToAccountId" class="field-validation-error" style="color: red"></span>
+                </div>
+            </div>
+            <div class="card-block">
+                <label for="Date">Datum</label>
+                <div class="input-group">
+                    <input type="date" class="form-control" asp-for="TimeOfAcction" value="@Model.TimeOfAcction.ToShortDateString()">
+                    <span asp-validation-for="TimeOfAcction" class="field-validation-error" style="color:red"></span>
+                </div>
+            </div>
+
+            <button class="btn-outline-dark" type="submit">Ok</button>
+
+        </div>
+    </div>
+
+</form>

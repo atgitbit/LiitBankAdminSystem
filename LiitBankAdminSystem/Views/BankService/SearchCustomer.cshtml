@@ -1,0 +1,213 @@
+﻿@model LiitBankAdminSystem.ViewModels.CustomerSearchViewModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+@if (User.IsInRole("Cashier"))
+{
+<div class="container my-container">
+    <h3 class="h6 text-uppercase mb-4">Kunder</h3>
+
+    <form method="get" class="mb-4" asp-controller="Cashier" asp-action="SearchCustomer">
+
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <input type="text" class="form-control" asp-for="q">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Sök</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+    <div id="selectCustomerPlaceHolder">
+
+    </div>
+
+    <table class="paginated-table" id="myList">
+        <thead>
+            <tr>
+                <th scope="col">
+                    <a asp-controller="Cashier"
+                       asp-action="SearchCustomer"
+                       asp-route-q="@Model.q"
+                       asp-route-sortOrder="@(Model.SortField == "Id" ? Model.OppositeSortOrder : "")"
+                       asp-route-sortField="Personnummer">
+                        Kundnummer
+                        @if (Model.SortField == "Id")
+                        {
+                            if (Model.SortOrder == "asc")
+                            {
+                                <i class="fas fa-sort-down"></i>
+                            }
+                            else
+                            {
+                                <i class="fas fa-sort-up"></i>
+                            }
+
+                        }
+
+                    </a>
+                </th>
+                <th scope="col">
+                    <a asp-controller="Cashier"
+                       asp-action="SearchCustomer"
+                       asp-route-q="@Model.q"
+                       asp-route-sortOrder="@(Model.SortField == "Personnummer" ? Model.OppositeSortOrder : "")"
+                       asp-route-sortField="Personnummer">
+                        Personnummer
+                        @if (Model.SortField == "Personnummer")
+                        {
+                            if (Model.SortOrder == "asc")
+                            {
+                                <i class="fas fa-sort-down"></i>
+                            }
+                            else
+                            {
+                                <i class="fas fa-sort-up"></i>
+                            }
+
+                        }
+
+                    </a>
+                </th>
+                <th scope="col">
+                    <a asp-controller="Cashier"
+                       asp-action="SearchCustomer"
+                       asp-route-q="@Model.q"
+                       asp-route-sortOrder="@(Model.SortField == "Namn" ? Model.OppositeSortOrder : "")"
+                       asp-route-sortField="Namn">
+                        Namn
+                        @if (Model.SortField == "Namn")
+                        {
+                            if (Model.SortOrder == "asc")
+                            {
+                                <i class="fas fa-sort-down"></i>
+                            }
+                            else
+                            {
+                                <i class="fas fa-sort-up"></i>
+                            }
+
+                        }
+
+                    </a>
+                </th>
+                <th scope="col">
+                    <a asp-controller="Cashier"
+                       asp-action="SearchCustomer"
+                       asp-route-q="@Model.q"
+                       asp-route-sortOrder="@(Model.SortField == "Email" ? Model.OppositeSortOrder : "")"
+                       asp-route-sortField="Email">
+                        Email
+                        @if (Model.SortField == "Email")
+                        {
+                            if (Model.SortOrder == "asc")
+                            {
+                                <i class="fas fa-sort-down"></i>
+                            }
+                            else
+                            {
+                                <i class="fas fa-sort-up"></i>
+                            }
+
+                        }
+                    </a>
+                </th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var customerSearchViewModel in Model.Customers)
+            {
+                <tr>
+                    <td>@customerSearchViewModel.Id</td>
+                    <td>@customerSearchViewModel.PersonalNumber</td>
+                    <td>@customerSearchViewModel.Name</td>
+                    <td>@customerSearchViewModel.EmailAddress</td>
+                    <td><a href="#" onclick="FetchPerson(@customerSearchViewModel.Id);return false;" class="btn btn-secondary active" role="button" aria-pressed="true">Visa detaljer</a></td>
+                    <td><a asp-controller="Cashier" asp-action="GetCustomerAllDetails" asp-route-Id="@customerSearchViewModel.Id" class="btn btn-secondary active" role="button" aria-pressed="true">Välj</a></td>
+                </tr>
+            }
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                            <li class="page-item @(Model.Page == 1 ? "disabled" : "")">
+
+                                <a class="page-link"
+                                   asp-controller="Cashier"
+                                   asp-action="SearchCustomer"
+                                   asp-route-q="@Model.q"
+                                   asp-route-sortOrder="@Model.SortOrder"
+                                   asp-route-sortField="@Model.SortField"
+                                   asp-route-page="@(Model.Page - 1)">Föregående</a>
+                            </li>
+
+
+                            @for (int pa = 1; pa <= Model.TotalPages; pa++)
+                            {
+
+                                <li class="page-item @(pa == Model.Page ? "active" : "")">
+                                    <a class="page-link"
+                                       asp-controller="Cashier"
+                                       asp-action="SearchCustomer"
+                                       asp-route-q="@Model.q"
+                                       asp-route-sortOrder="@Model.SortOrder"
+                                       asp-route-sortField="@Model.SortField"
+                                       asp-route-page="@pa">
+                                        @pa
+                                    </a>
+                                </li>
+                            }
+
+
+
+                            <li class="page-item @(Model.Page == Model.TotalPages ? "disabled" : "")">
+                                <a class="page-link"
+                                   asp-controller="Cashier"
+                                   asp-action="SearchCustomer"
+                                   asp-route-q="@Model.q"
+                                   asp-route-sortOrder="@Model.SortOrder"
+                                   asp-route-sortField="@Model.SortField"
+                                   asp-route-page="@(Model.Page + 1)">Nästa</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
+}
+
+@section Scripts
+{
+    <script>
+        function FetchCustomer(Id) {
+            $.ajax({
+                url: "/Cashier/GetCustomerAllDetails/" + Id,
+                success: function (result) {
+                    $('#selectCustomerPlaceHolder').html(result);
+                }
+            });
+        }
+    </script>
+}

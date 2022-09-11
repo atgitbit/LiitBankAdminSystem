@@ -1,0 +1,82 @@
+﻿@model LiitBankAdminSystem.ViewModels.AccountDetailViewModel
+
+
+  
+<div class="col-lg-12 mb-5">
+    <div class="blogBox">
+    
+
+        <a asp-controller="Cashier" asp-action="Deposit" asp-route-Id="@Model.Account.AccountId" class="btn btn-secondary active" role="button" aria-pressed="true"> Insättning</a>
+       
+        <a asp-controller="Cashier" asp-action="Withdraw" asp-route-Id="@Model.Account.AccountId" class="btn btn-secondary active" role="button" aria-pressed="true">Uttag</a>
+        
+        <a asp-controller="Cashier" asp-action="Transaction" asp-route-Id="@Model.Account.AccountId" class="btn btn-secondary active" role="button" aria-pressed="true">Överföring</a>
+    
+
+    </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="h6 text-uppercase mb-0">Konto id</h3>
+                        <p>@Model.Account.AccountId</p>
+                        <br />
+                        <h3 class="h6 text-uppercase mb-0">Total saldo</h3>
+                        <p> @Model.Account.Balance</p>
+                        <br />
+                    </div>
+                    <div class="card-body">
+                        <table class="paginated-table" id="myList">
+                            <thead>
+                            <tr>
+                                <th scope="col">Datum</th>
+                                <th scope="col">Transaktions id</th>
+                                <th scope="col">Summa</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            @foreach (var accountViewModel in Model.Transactions)
+                            {
+
+                                <tr>
+                                    <td>@accountViewModel.Date</td>
+                                    <td>@accountViewModel.TransactionId</td>
+                                    <td>@accountViewModel.Amount</td>
+                                </tr>
+
+                            }
+
+                            </tbody>
+                      
+                        </table>
+                        <div>
+                            <div id="loadMore">Load more</div>
+                            <div id="showLess">Show less</div>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+
+@*@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            var cTable = $("#myList");
+            size_li = $("#myList > tbody > tr").size();
+            var cRows = cTable.find('tr:gt(0)');
+            var cRowCount = cRows.size();
+            $('#myList > tbody > tr').hide();
+            x=2;
+            $('#myList > tbody > tr:lt('+x+')').show();
+            $('#loadMore').click(function () {
+                x= (x+2 <= size_li) ? x+2 : size_li;
+                $('#myList > tbody > tr:lt('+x+')').show();        
+                //$('#myList li:lt('+x+')').show();
+            });
+            $('#showLess').click(function () {
+                x=(x-2<0) ? 3 : x-2;
+                $('#myList > tbody >tr ').not(':lt('+x+')').hide();
+            });
+        });
+    </script>
+}*@

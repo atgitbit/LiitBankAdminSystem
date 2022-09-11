@@ -1,0 +1,44 @@
+﻿@model LiitBankAdminSystem.ViewModels.DepositViewModel
+
+
+
+<form asp-controller="Cashier" asp-action="Deposit" method="post">
+
+    <div class="col-sm-12">
+
+        <div class="card">
+            <div class="card-header">
+                <h5>Sätt in pengar</h5>
+                <div class="card-header-right">
+                    <i class="icofont icofont-spinner-alt-5"></i>
+                </div>
+            </div>
+
+            <div class="card-block">
+                <label asp-for="AccountId">Kontonummer</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" asp-for="AccountId">
+                    <span asp-validation-for="AccountId" class="field-validation-error" style="color: red"></span>
+                </div>
+            </div>
+            <div class="card-block">
+                <label asp-for="Amount">Summa att lägga in</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" asp-for="Amount">
+                    <span asp-validation-for="Amount" class="field-validation-error" style="color: red"></span>
+                </div>
+            </div>
+            <div class="card-block">
+                <label for="Date">Datum</label>
+                <div class="input-group">
+                    <input type="date" class="form-control" asp-for="Date" value="@Model.Date.ToShortDateString()">
+                    <span asp-validation-for="Date" class="field-validation-error" style="color:red"></span>
+                </div>
+            </div>
+
+            <button class="btn-outline-dark" type="submit">Ok</button>
+
+        </div>
+    </div>
+
+</form>
